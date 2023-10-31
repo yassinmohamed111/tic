@@ -1,4 +1,4 @@
-<h1>It's a python simple version of the Famous wordle game :)</h1>
+<h1>It's a simple python version of the Famous wordle game :)</h1>
 
 
 <h2>video of the game:</h2>
