@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-
+from termcolor import colored
 
 words = pd.read_csv("wordle.csv")
 
@@ -11,26 +11,54 @@ def game():
     wordforgame = words.iloc[randomnumber][0]
 
     arrayofchars = ['_' , '_' , '_' , "_" , '_']
+    common_letters = ""
+    unique_letters = ""
+    unique_list =  []
    
     counter = 0 
     game = 'sha8ala'
     while counter!=7  or game != 'done':
+        
         play = input(f"please enter a word consist of 5 letters ({6 - counter } tries left) :")
+    
+    
+        for letter in play:
+             if letter in wordforgame and letter not in common_letters:
+                 common_letters += letter
+
+        unique_letters = ''.join(set(play) - set(wordforgame))
+        unique_list.append(unique_letters)
 
         if not words['word'].astype(str).str.contains(play, case=False, na=False).any() or len(play) != 5:
             print("That's not a word. Try again!")
             continue
 
         
-
+        
         for i in range(5) :
+            cond = play
             if play[i] == wordforgame[i] :
                 arrayofchars[i] = play[i]
                 
             elif play[i] != wordforgame[i]:
                 None
 
-        print(arrayofchars)
+     
+        green_text = "\033[92m"
+        yellow_text = "\033[93m"
+        red_text = "\033[91m"
+        reset_color = "\033[0m"
+
+        
+        unique_list =  list(dict.fromkeys(unique_list))
+        
+        formatted_arrayofchars = f"{green_text}{arrayofchars}{reset_color}"
+        formatted_common_letters = f"{yellow_text}{common_letters}{reset_color}"
+        formatted_unique_letters = f"{red_text}{unique_list}{reset_color}"
+
+
+        # Print the text
+        print(formatted_arrayofchars, " ", f" ({formatted_common_letters})", " ", f" ({formatted_unique_letters})")
         counter = counter + 1 
 
         if arrayofchars == list(wordforgame):
