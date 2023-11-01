@@ -13,7 +13,7 @@ def game():
     arrayofchars = ['_' , '_' , '_' , "_" , '_']
     common_letters = ""
     unique_letters = ""
-    unique_list =  []
+   
    
     counter = 0 
     game = 'sha8ala'
@@ -21,22 +21,26 @@ def game():
         
         play = input(f"please enter a word consist of 5 letters ({6 - counter } tries left) :")
     
+
     
-        for letter in play:
-             if letter in wordforgame and letter not in common_letters:
-                 common_letters += letter
-
-        unique_letters = ''.join(set(play) - set(wordforgame))
-        unique_list.append(unique_letters)
-
         if not words['word'].astype(str).str.contains(play, case=False, na=False).any() or len(play) != 5:
             print("That's not a word. Try again!")
             continue
 
+
+        for letter in play:
+                    if letter in wordforgame and letter not in common_letters:
+                        common_letters += letter
+                        
+
+        for letter in play:
+                    if letter not in wordforgame and letter not in common_letters:
+                        unique_letters += letter
+
         
         
         for i in range(5) :
-            cond = play
+          
             if play[i] == wordforgame[i] :
                 arrayofchars[i] = play[i]
                 
@@ -50,11 +54,11 @@ def game():
         reset_color = "\033[0m"
 
         
-        unique_list =  list(dict.fromkeys(unique_list))
+       
         
         formatted_arrayofchars = f"{green_text}{arrayofchars}{reset_color}"
         formatted_common_letters = f"{yellow_text}{common_letters}{reset_color}"
-        formatted_unique_letters = f"{red_text}{unique_list}{reset_color}"
+        formatted_unique_letters = f"{red_text}{unique_letters}{reset_color}"
 
 
         # Print the text
