@@ -111,7 +111,7 @@ for line in colored_ascii_art:
 
 print("")
 print("welcome to wordle game in Python")
-print("You have 2 random char hints only to use !")
+print("You have 2  any random char hints  !")
 print("goodluck :)")
 
 words = pd.read_csv("wordle.csv")
@@ -139,7 +139,7 @@ def game():
         hint = 'hint'
         randomhint = random.randint(0 , 4)
 
-        if play == hint and counter<3 :
+        if play == hint and hintcounter <3 :
               arrayofchars[randomhint] = wordforgame[randomhint]
               print(arrayofchars)
               hintcounter = hintcounter + 1
